@@ -1,0 +1,93 @@
+﻿@model Recipe
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h1>Are You Sure You Want to Delete This Recipe?</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @Html.HiddenFor(model => model.RecipeID, htmlAttributes: new { @class = "control-label col-md-2" })
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.RecipeID)
+
+<div class="form-group">
+    <b>@Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })</b>
+    <div class="col-md-10">
+        @Html.DisplayFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <br />
+    <b>@Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" })</b>
+    <div class="col-md-10">
+        @Html.DisplayFor(model => model.Author, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <br />
+    <b>@Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })</b>
+    <div class="col-md-10">
+        @Html.DisplayFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+    </div>
+    <hr />
+    <div class="col-md-10">
+        <b>@Html.LabelFor(x => x.IngredientList, new { htmlAttributes = new { @class = "form-control" } })</b>
+    </div>
+    <!--<table>
+        <tr>
+            <th>Amount</th>
+            <th>Units</th>
+            <th>Ingredient</th>
+            <th>Special Instructions</th>
+        </tr>
+    </table>-->
+    @if (Model.IngredientList != null)
+    {
+        @foreach (var item in Model.IngredientList)
+        {
+            <div class="col-md-10">
+                @Html.DisplayFor(i => item.Amount, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                @Html.ValidationMessageFor(i => item.Amount, "", new { @class = "text-danger" })
+
+                @Html.DisplayFor(i => item.Unit, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                @Html.ValidationMessageFor(i => item.Unit, "", new { @class = "text-danger" })
+
+                @Html.DisplayFor(i => item.Name, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                @Html.ValidationMessageFor(i => item.Name, "", new { @class = "text-danger" })
+
+                @Html.DisplayFor(i => item.SpecialInstructions, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                @Html.ValidationMessageFor(i => item.SpecialInstructions, "", new { @class = "text-danger" })
+            </div>
+        }
+    }
+
+
+</div>
+    <hr />
+    <div class="col-md-10">
+        <b>@Html.LabelFor(model => model.StepList, new { htmlAttributes = new { @class = "form-control" } })</b>
+    </div>
+    @if (Model.StepList != null)
+    {
+        @foreach (var item in Model.StepList)
+        {
+            <div class="col-md-10">
+                @Html.DisplayFor(i => item.Instruction, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+                @Html.ValidationMessageFor(i => item.Instruction, "", new { @class = "text-danger" })
+            </div>
+        }
+    }
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="hidden" value=@Model.RecipeID />
+            <input type="submit" value="Delete" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}

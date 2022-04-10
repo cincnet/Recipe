@@ -1,0 +1,23 @@
+﻿@model List<Ingredient>
+@{
+    ViewBag.Title = "BlankStep";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<h2>Add New Igredient</h2>
+
+@using (Html.BeginForm())
+{
+    <div id="editorRows">
+    @foreach (var item in Model)
+    {
+        {Html.RenderPartial("GiftEditorRow", item);}
+    }
+        </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}

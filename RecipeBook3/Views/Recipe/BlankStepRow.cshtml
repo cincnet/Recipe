@@ -1,0 +1,24 @@
+﻿@model Step
+@{
+    ViewBag.Title = "BlankStep";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@using (Html.BeginForm())
+{
+    <div class="col-md-10">
+        <h2>Add Step</h2>
+        @Html.HiddenFor(i => i.RecipeID, new { htmlAttributes = new { @class = "control-label col-md-2" } })
+        @Html.AntiForgeryToken()
+        @Html.EditorFor(i => i.Instruction, new { htmlAttributes = new { @class = "control-label col-md-10" } })
+
+        @Html.ValidationMessageFor(i => i.Instruction, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+ }

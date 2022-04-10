@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Recipe>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Add")
+</p>
+
+<p>
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("SearchTerm")
+        @*@Html.ActionLink("Search", "Search", new { term =  })*@
+        <input type="submit" value="Search" class="btn btn-default" />
+
+    }
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">$(function () {
+            $("#submit").click(function () {
+                document.forms[0].submit();
+                return false;
+            });
+        });</script>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+    </tr>
+
+ @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.RecipeID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.RecipeID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.RecipeID })
+                    </td>
+                </tr>
+            }
+    
+</table>
+

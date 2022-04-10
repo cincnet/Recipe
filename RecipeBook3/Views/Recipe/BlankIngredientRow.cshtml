@@ -1,0 +1,49 @@
+﻿@model Ingredient
+@{
+    ViewBag.Title = "BlankStep";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<h2>Add New Igredient</h2>
+
+@using (Html.BeginForm())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <td>Amount</td>
+                <td>Units</td>
+                <td>Ingredient</td>
+                <td>Special Instructions</td>
+            </tr>
+        </thead>
+        <tr>
+            <td>
+                @Html.EditorFor(i => i.Amount, new { htmlAttributes = new { @class = "control-label col-md-10" } })
+                @Html.ValidationMessageFor(i => i.Amount, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(i => i.Unit, new { htmlAttributes = new { @class = "control-label col-md-10" } })
+                @Html.ValidationMessageFor(i => i.Unit, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(i => i.Name, new { htmlAttributes = new { @class = "control-label col-md-10" } })
+                @Html.ValidationMessageFor(i => i.Name, "", new { @class = "text-danger" })
+            </td>
+            <td>
+                @Html.EditorFor(i => i.SpecialInstructions, new { htmlAttributes = new { @class = "control-label col-md-10" } })
+                @Html.ValidationMessageFor(i => i.SpecialInstructions, "", new { @class = "text-danger" })
+            </td>
+            @*</div>*@
+        </tr>
+        @*<div class="col-md-10">*@
+
+
+    </table>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+}
