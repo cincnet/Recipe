@@ -109,7 +109,7 @@ namespace RecipeBook3.Controllers
         {
             var r = await _context.Recipes.Include(i => i.IngredientList).Include(i => i.StepList).ToListAsync();
 
-            var recipe = await _context.Recipes.Include(i => i.IngredientList).AsNoTracking().FirstOrDefaultAsync(m => m.RecipeID == id);
+            var recipe = await _context.Recipes.Include(i => i.IngredientList).FirstOrDefaultAsync(m => m.RecipeID == id);
             recipe.StepList = _context.Steps.Where(r => r.RecipeID == id).ToList();
             _context.Remove(recipe);
             await _context.SaveChangesAsync();
